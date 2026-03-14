@@ -19,6 +19,7 @@ let mainmusic = document.querySelector("#mainmusic");
 let drawSound = document.querySelector("#drawSound");
 let gametitle = document.querySelector("#gametitle");
 let vsComputer = false;
+let randomIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
 let turnO = true;
 let xwin = 0;
 let owin = 0;
