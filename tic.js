@@ -19,7 +19,6 @@ let mainmusic = document.querySelector("#mainmusic");
 let drawSound = document.querySelector("#drawSound");
 let gametitle = document.querySelector("#gametitle");
 let vsComputer = false;
-let randomIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
 let turnO = true;
 let xwin = 0;
 let owin = 0;
@@ -132,7 +131,6 @@ const computerMove = () => {
     // 2️⃣ Block player win
     for(let pattern of winpatterns){
         let [a,b,c] = pattern;
-
         let vals = [boxes[a].innerText, boxes[b].innerText, boxes[c].innerText];
 
         if(vals.filter(v => v === "O").length === 2 && vals.includes("")){
@@ -150,11 +148,6 @@ const computerMove = () => {
     });
 
 
-    let randomIndex = emptyBoxes[Math.floor(Math.random()*emptyBoxes.length)];
-
-
-
-function makeMove(index){
     boxes[index].innerText = "X";
     boxes[index].style.color = "red";
     boxes[index].disabled = true;
@@ -165,6 +158,7 @@ function makeMove(index){
     if(msgcontainer.classList.contains("hide")){
         turnIndicator.innerText = "Turn : O";
     }
+
 }
 
 
@@ -251,6 +245,7 @@ exitBtn.addEventListener("click", () => {
 
 
 
+
 function makeMove(index){
 
     boxes[index].innerText = "X";
@@ -264,4 +259,5 @@ function makeMove(index){
         turnIndicator.innerText = "Turn : O";
     }
 
+}
 }
