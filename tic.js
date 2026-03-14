@@ -170,6 +170,20 @@ function makeMove(index){
 
 }
 
+function makeMove(index){
+    boxes[index].innerText = "X";
+    boxes[index].style.color = "red";
+    boxes[index].disabled = true;
+
+    checkwinner();
+    checkDraw();
+
+    if(msgcontainer.classList.contains("hide")){
+        turnIndicator.innerText = "Turn : O";
+    }
+}
+
+
 boxes.forEach(box => {
     box.addEventListener("click", () => {
 
