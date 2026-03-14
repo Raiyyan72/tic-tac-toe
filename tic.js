@@ -170,7 +170,6 @@ function makeMove(index){
 
 }
 
-
 boxes.forEach(box => {
     box.addEventListener("click", () => {
 
