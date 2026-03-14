@@ -19,6 +19,7 @@ let mainmusic = document.querySelector("#mainmusic");
 let drawSound = document.querySelector("#drawSound");
 let gametitle = document.querySelector("#gametitle");
 let vsComputer = false;
+let randomIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
 let turnO = true;
 let xwin = 0;
 let owin = 0;
@@ -133,6 +134,22 @@ const computerMove = () => {
         turnIndicator.innerText = "Turn : O";
     }
 }
+
+function makeMove(index){
+
+    boxes[index].innerText = "X";
+    boxes[index].style.color = "red";
+    boxes[index].disabled = true;
+
+    checkwinner();
+    checkDraw();
+
+    if(msgcontainer.classList.contains("hide")){
+        turnIndicator.innerText = "Turn : O";
+    }
+
+}
+
 
 boxes.forEach(box => {
     box.addEventListener("click", () => {
