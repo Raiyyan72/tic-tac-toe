@@ -115,24 +115,45 @@ const checkDraw = () => {
 
 // Computer move
 const computerMove = () => {
+
+    // 1️⃣ Try to win
+    for(let pattern of winpatterns){
+        let [a,b,c] = pattern;
+
+        let vals = [boxes[a].innerText, boxes[b].innerText, boxes[c].innerText];
+
+        if(vals.filter(v => v === "X").length === 2 && vals.includes("")){
+            let index = pattern[vals.indexOf("")];
+            makeMove(index);
+            return;
+        }
+    }
+
+    // 2️⃣ Block player win
+    for(let pattern of winpatterns){
+        let [a,b,c] = pattern;
+
+        let vals = [boxes[a].innerText, boxes[b].innerText, boxes[c].innerText];
+
+        if(vals.filter(v => v === "O").length === 2 && vals.includes("")){
+            let index = pattern[vals.indexOf("")];
+            makeMove(index);
+            return;
+        }
+    }
+
+    // 3️⃣ Otherwise random move
     let emptyBoxes = [];
+
     boxes.forEach((box,index)=>{
         if(box.innerText === "") emptyBoxes.push(index);
     });
+
     if(emptyBoxes.length === 0) return;
 
-    let randomIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
-    boxes[randomIndex].innerText = "X";
-    boxes[randomIndex].style.color = "red";
-    //  boxes[randomIndex].style.backgroundColor = "#f0a0a0";
-    boxes[randomIndex].disabled = true;
+    let randomIndex = emptyBoxes[Math.floor(Math.random()*emptyBoxes.length)];
 
-    checkwinner();
-    checkDraw();
-
-    if(msgcontainer.classList.contains("hide")){
-        turnIndicator.innerText = "Turn : O";
-    }
+    makeMove(randomIndex);
 }
 
 function makeMove(index){
@@ -148,6 +169,19 @@ function makeMove(index){
         turnIndicator.innerText = "Turn : O";
     }
 
+}
+
+function makeMove(index){
+    boxes[index].innerText = "X";
+    boxes[index].style.color = "red";
+    boxes[index].disabled = true;
+
+    checkwinner();
+    checkDraw();
+
+    if(msgcontainer.classList.contains("hide")){
+        turnIndicator.innerText = "Turn : O";
+    }
 }
 
 
