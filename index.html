@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe by Raiyyan</title>
+    <link rel="stylesheet" href="tic.css">
+    <audio id="winSound" src="mixkit-auditorium-moderate-applause-and-cheering-502.wav"></audio>
+</head>
+<body>
+    <div class="msg-container hide">
+        <p class="msg">
+            Winner
+        </p>
+    </div>
+    <!-- <div id="startScreen">
+        <h2 id="gametitle">Welcome to Raiyyan's World</h2>
+    </div> -->
+    <h1 id="h1"> Tic Tac Toe</h1> 
+    <button class="newbtn">New Game</button>
+<p id="turn">Turn : O</p>
+<div id="scoreboard">
+    X : <span id="xscore">0</span> | 
+    O : <span id="oscore">0</span>
+</div>
+
+<button id="resetscore">Reset Score</button><br>
+<div id="startScreen">
+    <button id="friendBtn">Play vs Friend</button>
+    <button id="computerBtn">Play vs Computer</button>
+</div>
+
+
+<hr> 
+<div id="container" class="hide">
+    <button id="exitBtn">Exit</button>
+
+   <div id="game">
+    <button class="box"></button>
+     <button class="box"></button>
+      <button class="box"></button>
+       <button class="box"></button>
+        <button class="box"></button>
+         <button class="box"></button>
+          <button class="box"></button>
+           <button class="box"></button>
+            <button class="box"></button>
+    </div>
+   </div>
+    <button id="reset">Reset Button</button>
+    <audio id="mainmusic" src="mixkit-game-level-music-689.wav" loop preload="auto"></audio>
+    <audio id="bgMusic" src="mixkit-player-losing-or-failing-2042.wav" loop></audio>
+    <audio id="drawSound" src="draw-sound.mp3" preload="auto"></audio>
+
+    <script src="tic.js"></script><br><br>
+    <hr>
+    <footer class="credit">
+    Made by :- Raiyyan khan
+</footer>
+</body>
+</html>
