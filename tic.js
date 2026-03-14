@@ -149,27 +149,10 @@ const computerMove = () => {
         if(box.innerText === "") emptyBoxes.push(index);
     });
 
-    if(emptyBoxes.length === 0) return;
 
     let randomIndex = emptyBoxes[Math.floor(Math.random()*emptyBoxes.length)];
 
-    makeMove(randomIndex);
-}
 
-function makeMove(index){
-
-    boxes[index].innerText = "X";
-    boxes[index].style.color = "red";
-    boxes[index].disabled = true;
-
-    checkwinner();
-    checkDraw();
-
-    if(msgcontainer.classList.contains("hide")){
-        turnIndicator.innerText = "Turn : O";
-    }
-
-}
 
 function makeMove(index){
     boxes[index].innerText = "X";
@@ -265,3 +248,20 @@ exitBtn.addEventListener("click", () => {
      mainmusic.pause(); 
     bgMusic.currentTime = 0;
 });
+
+
+
+function makeMove(index){
+
+    boxes[index].innerText = "X";
+    boxes[index].style.color = "red";
+    boxes[index].disabled = true;
+
+    checkwinner();
+    checkDraw();
+
+    if(msgcontainer.classList.contains("hide")){
+        turnIndicator.innerText = "Turn : O";
+    }
+
+}
