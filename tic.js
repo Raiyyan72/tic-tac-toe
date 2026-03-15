@@ -115,50 +115,25 @@ const checkDraw = () => {
 // Computer move
 const computerMove = () => {
 
-    // 1️⃣ Try to win
-    for(let pattern of winpatterns){
-        let [a,b,c] = pattern;
+    let bestScore = -Infinity;
+    let move;
 
-        let vals = [boxes[a].innerText, boxes[b].innerText, boxes[c].innerText];
+    boxes.forEach((box, index) => {
+        if(box.innerText === ""){
+            box.innerText = "X";
 
-        if(vals.filter(v => v === "X").length === 2 && vals.includes("")){
-            let index = pattern[vals.indexOf("")];
-            makeMove(index);
-            return;
+            let score = minimax(boxes, 0, false);
+
+            box.innerText = "";
+
+            if(score > bestScore){
+                bestScore = score;
+                move = index;
+            }
         }
-    }
-
-    // 2️⃣ Block player win
-    for(let pattern of winpatterns){
-        let [a,b,c] = pattern;
-        let vals = [boxes[a].innerText, boxes[b].innerText, boxes[c].innerText];
-
-        if(vals.filter(v => v === "O").length === 2 && vals.includes("")){
-            let index = pattern[vals.indexOf("")];
-            makeMove(index);
-            return;
-        }
-    }
-
-    // 3️⃣ Otherwise random move
-    let emptyBoxes = [];
-
-    boxes.forEach((box,index)=>{
-        if(box.innerText === "") emptyBoxes.push(index);
     });
 
-
-    boxes[index].innerText = "X";
-    boxes[index].style.color = "red";
-    boxes[index].disabled = true;
-
-    checkwinner();
-    checkDraw();
-
-    if(msgcontainer.classList.contains("hide")){
-        turnIndicator.innerText = "Turn : O";
-    }
-
+    makeMove(move);
 }
 
 
@@ -260,4 +235,79 @@ function makeMove(index){
     }
 
 }
+
+
+
+function minimax(board, depth, isMaximizing){
+
+    let result = checkWinnerAI();
+
+    if(result !== null){
+        const scores = {
+            X: 1,
+            O: -1,
+            draw: 0
+        };
+        return scores[result];
+    }
+
+    if(isMaximizing){
+
+        let bestScore = -Infinity;
+
+        boxes.forEach((box)=>{
+            if(box.innerText === ""){
+                box.innerText = "X";
+
+                let score = minimax(board, depth+1, false);
+
+                box.innerText = "";
+
+                bestScore = Math.max(score, bestScore);
+            }
+        });
+
+        return bestScore;
+
+    }else{
+
+        let bestScore = Infinity;
+
+        boxes.forEach((box)=>{
+            if(box.innerText === ""){
+                box.innerText = "O";
+
+                let score = minimax(board, depth+1, true);
+
+                box.innerText = "";
+
+                bestScore = Math.min(score, bestScore);
+            }
+        });
+
+        return bestScore;
+    }
+}
+
+function checkWinnerAI(){
+
+    for(let pattern of winpatterns){
+        let [a,b,c] = pattern;
+
+        let valA = boxes[a].innerText;
+        let valB = boxes[b].innerText;
+        let valC = boxes[c].innerText;
+
+        if(valA && valA === valB && valB === valC){
+            return valA;
+        }
+    }
+
+    let openSpots = Array.from(boxes).filter(box => box.innerText === "");
+
+    if(openSpots.length === 0){
+        return "draw";
+    }
+
+    return null;
 }
