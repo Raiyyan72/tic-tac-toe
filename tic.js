@@ -153,7 +153,7 @@ boxes.forEach(box => {
             checkDraw();
 
             if(msgcontainer.classList.contains("hide")){
-                setTimeout(computerMove, 100);
+                computerMove();
             }
 
         } else {
